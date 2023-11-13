@@ -1,5 +1,8 @@
 import chalk from 'chalk'
 import { Label } from './enum'
+import { YearFifaWorldCup } from './models/YearFifaWorldCup.model'
+import { YearFifaWorldCupType } from './types'
+import { searchByOpenAI } from './openIA'
 
 export const print = (label: Label, message: String): void => {
   switch (label) {
@@ -18,7 +21,7 @@ export const print = (label: Label, message: String): void => {
   }
 }
 
-export const takeDesicion = (year: number): void => {
+export const takeDesicion = async (year: number): Promise<YearFifaWorldCupType | undefined> => {
   if (year === 1942 || year === 1946) {
     throw new Error('These years are invalid because in these years, the FIFA organization postponed the tournament due to the Second World War.')
   }
@@ -30,6 +33,16 @@ export const takeDesicion = (year: number): void => {
   }
   const DIFF_YEARS = (1930 - year) % 4
   if (DIFF_YEARS === 0) {
-    /// Primero mirar si esa informacion la tengo en la base de datos antes de usar chatGTP, sino usar chatGTP.
+    try {
+      const [findYear] = await YearFifaWorldCup.find({ year })
+      if (findYear !== undefined) {
+        return findYear as YearFifaWorldCupType
+      } else {
+        return await searchByOpenAI(year)
+      }
+    } catch (error) {
+      throw new Error('Error finding in mongoDB database')
+    }
   }
+  return undefined
 }

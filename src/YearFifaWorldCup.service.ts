@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import YearFifaWorldCupSchema from './models/YearFifaWorldCup.model'
+import { YearFifaWorldCupSchema } from './models/YearFifaWorldCup.model'
 import { YearFifaWorldCupType } from './types'
 import { print } from './utils'
 import { Label } from './enum'

@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const YearFifaWorldCupSchema = new Schema({
   year: {
@@ -19,4 +19,9 @@ const YearFifaWorldCupSchema = new Schema({
   }
 })
 
-export default YearFifaWorldCupSchema
+const YearFifaWorldCup = mongoose.model('YearFifaWorldCup', YearFifaWorldCupSchema)
+
+export {
+  YearFifaWorldCup,
+  YearFifaWorldCupSchema
+}
