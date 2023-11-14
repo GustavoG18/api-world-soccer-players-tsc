@@ -1,7 +1,6 @@
 import express from 'express'
 import { print, takeDesicion } from './utils'
 import { Label } from './enum'
-// import { searchByOpenAI } from './openIA'
 import 'dotenv/config'
 import databaseConnect from './database'
 
@@ -25,3 +24,5 @@ app.get('/countrys-in-world-cup/:year', (req, res) => {
 app.listen(PORT, () => {
   print(Label.INFO, `Listening in port: http://localhost:${PORT}/`)
 })
+
+export default app
