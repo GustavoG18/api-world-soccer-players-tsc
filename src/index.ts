@@ -21,6 +21,11 @@ app.get('/countrys-in-world-cup/:year', (req, res) => {
     })
 })
 
+app.post('/advice', (req, _) => {
+  const body = req.body
+  console.log(body)
+})
+
 app.listen(PORT, () => {
   print(Label.INFO, `Listening in port: http://localhost:${PORT}/`)
 })
